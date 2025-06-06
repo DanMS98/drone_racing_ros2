@@ -184,5 +184,8 @@ namespace tello_driver
 } // namespace tello_driver
 
 #include "rclcpp_components/register_node_macro.hpp"
+// #include "rclcpp_components/rclcpp_components/register_node_macro.hpp"
+// #include "rclcpp_components/component_manager.hpp"
+
 
 RCLCPP_COMPONENTS_REGISTER_NODE(tello_driver::TelloDriverNode)

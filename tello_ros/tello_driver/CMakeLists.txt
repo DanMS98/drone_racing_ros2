@@ -47,6 +47,10 @@ include_directories(
   include
   h264decoder)
 
+# This line is needed for ROS2 Humble and later to find the rclcpp_components package  
+  include_directories(/opt/ros/humble/include/rclcpp_components)
+
+
 # h264decoder uses deprecated ffmpeg calls, turn off the warnings
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
 
