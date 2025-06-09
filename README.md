@@ -34,19 +34,20 @@ after that
     ros-humble-cv-bridge \
     ros-humble-camera-calibration-parsers \
     libignition-rendering6 \
-    
-finally, use pip to install trasnformations package:
 
-    pip install transformations
+make a folder, inside that folder make a virtual environment:
 
+    python -m venv venv
+    source venv/bin/activate
 
 #### Build this package
     mkdir -p ~/drone_racing_ros2_ws/src
     cd ~/drone_racing_ros2_ws/src
     git clone git@github.com:DanMS98/drone_racing_ros2.git
+    pip install -r requirements.txt
     cd ..
     source /opt/ros/humble/setup.bash
-    colcon build --symlink-install
+    colcon build
     
 ### 3️⃣ Run a teleop simulation
 
