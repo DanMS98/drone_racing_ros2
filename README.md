@@ -33,7 +33,8 @@ after that
     libasio-dev \
     ros-humble-cv-bridge \
     ros-humble-camera-calibration-parsers \
-    libignition-rendering6 \
+    ros-humble-gazebo-dev \
+    libignition-rendering6 
 
 make a folder, inside that folder make a virtual environment:
 
