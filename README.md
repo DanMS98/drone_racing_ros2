@@ -34,6 +34,7 @@ after that
     ros-humble-cv-bridge \
     ros-humble-camera-calibration-parsers \
     ros-humble-gazebo-dev \
+    ros-humble-gazebo-ros* \
     libignition-rendering6 
 
 make a folder, inside that folder make a virtual environment:
