@@ -37,23 +37,26 @@ after that
     ros-humble-gazebo-ros* \
     libignition-rendering6 
 
-make a folder, inside that folder make a virtual environment:
+Make a folder as a workspace, inside that folder, make a virtual environment:
 
+    mkdir -p ~/ros2_ws/src
+    cd ~/ros2_ws
     python -m venv venv
     source venv/bin/activate
 
 #### Build this package
-    mkdir -p ~/drone_racing_ros2_ws/src
-    cd ~/drone_racing_ros2_ws/src
+    
+    cd ~/ros2_ws/src
     git clone git@github.com:DanMS98/drone_racing_ros2.git
+    cd drone_racing_ros2/
     pip install -r requirements.txt
-    cd ..
+    cd ~/ros2_ws
     source /opt/ros/humble/setup.bash
     colcon build
     
 ### 3️⃣ Run a teleop simulation
 
-    cd ~/drone_racing_ros2_ws
+    cd ~/ros2_ws
     source install/setup.bash
     export GAZEBO_MODEL_PATH=${PWD}/install/tello_gazebo/share/tello_gazebo/models
     source /usr/share/gazebo/setup.sh
