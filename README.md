@@ -21,15 +21,23 @@ Use the `ros-humble-desktop` option for full desktop tools.
 ---
 
 ### 2️⃣ Install dependencies
+first install gazebo for ros humble
+    
+    source /opt/ros/humble/setup.bash 
+    sudo apt-get install ros-${ROS_DISTRO}-ros-gz
+
+after that
+    
     sudo apt update
     sudo apt install \
-    gazebo11 libgazebo11 libgazebo11-dev \
     libasio-dev \
     ros-humble-cv-bridge \
     ros-humble-camera-calibration-parsers \
     libignition-rendering6 \
-    python3-transformations
+    
+finally, use pip to install trasnformations package:
 
+    pip install transformations
 
 
 #### Build this package
