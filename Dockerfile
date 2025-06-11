@@ -21,6 +21,7 @@ RUN apt-get update && \
         ros-humble-gazebo-dev \
         ros-humble-gazebo-ros* \
         libignition-rendering6 \
+        ros-humble-rviz2 \
         && rm -rf /var/lib/apt/lists/*
 
 
