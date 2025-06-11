@@ -75,6 +75,32 @@ If you run into the **No namespace found** error re-set `GAZEBO_MODEL_PATH`:
     ros2 service call /drone1/tello_action tello_msgs/TelloAction "{cmd: 'takeoff'}"
     ros2 service call /drone1/tello_action tello_msgs/TelloAction "{cmd: 'land'}"
     ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/drone1
+## Instructions for using Docker
+
+### The Image  
+To build the image, run the Docker file using the following command:
+
+    docker build -t drone_racing_ros2:humble .
+
+Before running Docker, make sure to tell your X11 server to allow local connections from root (the user inside the container).
+
+    xhost +local:root
+
+afterwards
+
+    docker run -it --rm \
+    --net=host \
+    --env="DISPLAY=$DISPLAY" \
+    --env="QT_X11_NO_MITSHM=1" \
+    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+    drone_racing_ros2:humble
+
+
+    
+
+
+
+
 
 
 
