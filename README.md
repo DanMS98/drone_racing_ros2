@@ -76,9 +76,11 @@ If you run into the **No namespace found** error re-set `GAZEBO_MODEL_PATH`:
     ros2 service call /drone1/tello_action tello_msgs/TelloAction "{cmd: 'land'}"
     ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/drone1
 ## Instructions for using Docker
+There is also an image prepared for this repo to streamline the process. This image also includes the [Tentone Tello-ROS2 repository](https://github.com/tentone/tello-ros2)
+ for working with a real Tello.
 
 ### The Image  
-To build the image, run the Docker file using the following command:
+To build the image, go to the root of the repo run the Docker file using the following command:
 
     docker build -t drone_racing_ros2:humble .
 
