@@ -26,10 +26,24 @@ RUN apt-get update && \
 
 WORKDIR /root/ros2_ws/src
 
-# Clone the drone racing ROS2 package
+# Drone racing ROS2 package
 RUN git clone https://github.com/DanMS98/drone_racing_ros2.git
 
-# Install Python dependencies
+# Tello ROS2 package
+RUN git clone https://github.com/tentone/tello-ros2.git
+
+# Install Tello ROS2 Python packages
+RUN pip3 install --no-cache-dir \
+        catkin_pkg \
+        rospkg \
+        av \
+        image \
+        opencv-python \
+        djitellopy2 \
+        pyyaml
+
+
+# Install Drone racing dependencies
 COPY requirements.txt /root/ros2_ws/
 RUN pip3 install --no-cache-dir -r /root/ros2_ws/requirements.txt
 
@@ -37,9 +51,8 @@ RUN pip3 install --no-cache-dir -r /root/ros2_ws/requirements.txt
 WORKDIR /root/ros2_ws
 
 RUN . /opt/ros/humble/setup.sh && \
-    colcon build
+    colcon build --packages-skip orbslam2
 
 RUN echo "source /root/ros2_ws/install/setup.bash" >> /root/.bashrc
 
-# Default command
 CMD ["bash"]
