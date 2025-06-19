@@ -97,6 +97,69 @@ afterwards
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     drone_racing_ros2:humble
 
+## Running the docker in WSL
+
+By default, you are running WSL on Windows, be aware that WSL2 does not have direct GUI access, and Docker containers run in a separate network + user space, which blocks them from rendering GUI windows. Fixing this involves:
+
+1. Making sure a GUI server is running on Windows
+2. Granting access to WSL and Docker to use that display
+3. Avoiding access control issues (xhost, DISPLAY)
+
+### Launch VcXsrv
+
+1. Open `XLaunch`
+2. Select:
+   - ✅ Multiple windows
+   - ✅ Display number: `0`
+   - ✅ Start no client
+   - ✅ **Disable access control**
+3. Allow through Windows Firewall (Private + Public)
+
+---
+
+### WSL2 Configuration
+afterwards, go inside the WSL and 
+```bash
+export DISPLAY=$(ip route | grep default | awk '{print $3}'):0
+xhost +local:root
+```
+
+---
+
+### Test X11
+
+```bash
+sudo apt install -y x11-apps
+xeyes
+```
+
+If `xeyes` GUI opens, you're ready.
+
+---
+
+### Run Docker Container
+
+```bash
+docker run -it --rm \
+  --net=host \
+  --env="DISPLAY=$DISPLAY" \
+  --env="QT_X11_NO_MITSHM=1" \
+  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+  danms98/drone_racing_ros2:humble
+```
+
+---
+
+## 🎮 Launch the Simulation
+
+Inside the container:
+
+```bash
+ros2 launch tello_gazebo simple_launch.py
+```
+
+
+
 
     
 
