@@ -105,6 +105,16 @@ By default, you are running WSL on Windows, be aware that WSL2 does not have dir
 2. Granting access to WSL and Docker to use that display
 3. Avoiding access control issues (xhost, DISPLAY)
 
+### Firewall check
+Before starting, make sure Tello can communicate with you through windows -> WSL -> container:
+1. Go to Windows Defender Firewall > Advanced Settings > Inbound Rules
+2. Create a rule for:
+        UDP
+        Port 11111
+        Allow connection
+3. Ensure your active network profile (likely Private) has that rule applied.
+4. do the same for ports 8889 and 8890.
+
 ### Launch VcXsrv
 
 1. Open `XLaunch`
@@ -112,18 +122,27 @@ By default, you are running WSL on Windows, be aware that WSL2 does not have dir
    - ✅ Multiple windows
    - ✅ Display number: `0`
    - ✅ Start no client
+   - ❌ Disable native OpenGL
    - ✅ **Disable access control**
 3. Allow through Windows Firewall (Private + Public)
 
 ---
 
 ### WSL2 Configuration
+First, you have to set wsl networking configuration to mirrored. To do that:
+
+1. Go to C:\Users\{YOUR_USER_NAME}
+2. Create or edit .wslconfig and add
+
+        [wsl2]
+        networkingMode=mirrored
+3. Save and exit.
+    
 afterwards, go inside the WSL and 
 ```bash
-export DISPLAY=$(ip route | grep default | awk '{print $3}'):0
-xhost +local:root
+export DISPLAY=127.0.0.1:0
+xhost +
 ```
-
 ---
 
 ### Test X11
